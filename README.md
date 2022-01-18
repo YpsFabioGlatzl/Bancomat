@@ -3,16 +3,16 @@
 
 
 ## Arbeitsteilung 
-###Nikita Petrov
-Vorgehen Punkte:
-1.
-2.
-3.
-4.
+######Nikita Petrov
+**Vorgehen Punkte:**
+1,
+2,
+3,
+4
 
-###Glatzl Fabio
+######Glatzl Fabio
 
-Vorgehen Punkte: 
-5.
-6.
-7.
+**Vorgehen Punkte: **
+5,
+6,
+7
