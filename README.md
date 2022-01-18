@@ -3,18 +3,19 @@
 
 
 ## Arbeitsteilung 
-###### Nikita Petrov
-**Vorgehen Punkte:**
+**Nikita Petrov**
+###### Vorgehen Punkte:
 ```
 1,
 2,
 3,
 4
 ```
-###### Glatzl Fabio
+**Glatzl Fabio**
 
+
+###### Vorgehen Punkte:
 ```
-**Vorgehen Punkte:**
 5,
 6,
 7
