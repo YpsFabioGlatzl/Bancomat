@@ -7,15 +7,23 @@ package bancomant.views;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import logic.Card;
 
 /**
  *
  * @author np
  */
 public class Start extends javax.swing.JFrame {
+    
+    private String currentSelectedCard;
+    private char[] enteredPin;
+    private int unlockAttempts = 3;
 
     public ImageIcon img = new ImageIcon(getClass().getResource("logo_small.png"));
     /**
@@ -45,6 +53,7 @@ public class Start extends javax.swing.JFrame {
         button_confirm = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel(img);
+        attempsLeft = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -53,7 +62,7 @@ public class Start extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel2.setText("Bitte Karte einführen");
 
-        dropdown_cards.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        dropdown_cards.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card 1", "Card 2", "Card 3", "Card 4" }));
         dropdown_cards.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dropdown_cardsActionPerformed(evt);
@@ -105,6 +114,10 @@ public class Start extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(attempsLeft)
+                .addGap(209, 209, 209))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +130,9 @@ public class Start extends javax.swing.JFrame {
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(attempsLeft)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -147,7 +162,22 @@ public class Start extends javax.swing.JFrame {
     }//GEN-LAST:event_dropdown_cardsActionPerformed
 
     private void button_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_confirmActionPerformed
-        
+       currentSelectedCard = dropdown_cards.getSelectedItem().toString();
+       enteredPin = passwordField.getPassword();
+       Card card = new Card();
+        try {
+            if(card.checkCard(currentSelectedCard, enteredPin) == null){
+                unlockAttempts -= 1;
+                if(unlockAttempts > 0){
+                    attempsLeft.setText("Wrong Password! You have " + unlockAttempts + " tries left");
+                } else {
+                    card.lockCard();
+                    attempsLeft.setText("You entered your PIN incorrectly too many times. Your card is now blocked");
+                }
+            };
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not Found!");
+        }
     }//GEN-LAST:event_button_confirmActionPerformed
 
     /**
@@ -188,6 +218,7 @@ public class Start extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel attempsLeft;
     private javax.swing.JButton button_confirm;
     private javax.swing.JComboBox<String> dropdown_cards;
     private javax.swing.JLabel jLabel1;
