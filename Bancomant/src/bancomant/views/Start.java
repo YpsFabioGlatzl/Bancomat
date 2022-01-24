@@ -165,16 +165,22 @@ public class Start extends javax.swing.JFrame {
        currentSelectedCard = dropdown_cards.getSelectedItem().toString();
        enteredPin = passwordField.getPassword();
        Card card = new Card();
+       Card wrongCard = new Card();
+       
         try {
-            if(card.checkCard(currentSelectedCard, enteredPin) == null){
+            card = card.checkCard(currentSelectedCard, enteredPin);
+            if(card == null){
                 unlockAttempts -= 1;
                 if(unlockAttempts > 0){
                     attempsLeft.setText("Wrong Password! You have " + unlockAttempts + " tries left");
                 } else {
-                    card.lockCard();
+                    wrongCard.lockCard(currentSelectedCard);
                     attempsLeft.setText("You entered your PIN incorrectly too many times. Your card is now blocked");
                 }
-            };
+            } else {
+                System.out.println(card.getNameHolder());
+                //Show Home GUI
+            }
         } catch (FileNotFoundException ex) {
             System.out.println("File not Found!");
         }

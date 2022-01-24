@@ -8,6 +8,7 @@ package logic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -24,7 +25,8 @@ public class Card {
     private String bank;
     private String cardNumber;
     private String validTill;
-    private char[] pin;
+    private String pin;
+    private char[] specialPin = new char[6];
     
     public Card(){
         
@@ -38,12 +40,11 @@ public class Card {
         this.bank = bank;
         this.cardNumber = cardNumber;
         this.validTill = validTill;
-        this.pin = this.pin;
+        this.pin = pin;
     }
     
     public Card checkCard(String cardName, char[] pin) throws FileNotFoundException{
         pathToCards = pathToCards + cardName + ".txt";
-        System.out.println(pathToCards);
         File fileCard = new File(pathToCards);
         Scanner s = new Scanner(fileCard);
         ArrayList<String> data = new ArrayList<String>();
@@ -52,17 +53,19 @@ public class Card {
         }
         s.close();
         
-        Card card = new Card(data.get(0), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5), data.get(6), data.get(7));
-        
-        if(card.getPin() == pin){
-            return card;
-        }
+        Card card = new Card(data.get(0), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5).toString(), data.get(6).toString(), data.get(7).toString());
        
-        return null;
+        setSpecialPin(card.getPin());
+        
+        if (Arrays.equals(pin, specialPin)){
+          return card;  
+        } else {
+            return null;
+        }   
     }
     
     public void lockCard(String cardName){
-        //To Do
+        System.out.println("Card locked: " + cardName);
     }
 
     public String getPathToCards() {
@@ -137,14 +140,25 @@ public class Card {
         this.validTill = validTill;
     }
 
-    public char[] getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(char[] pin) {
+    public void setPin(String pin) {
         this.pin = pin;
+    }
+
+    public char[] getSpecialPin() {
+        return specialPin;
+    }
+
+    public void setSpecialPin(String Pin) {
+        for (int i = 0;i < Pin.length(); i++){
+                specialPin[i] = Pin.charAt(i);
+            }
+        }
     }
     
     
     
-}
+
