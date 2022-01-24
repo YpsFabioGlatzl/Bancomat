@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import logic.Card;
+import bancomant.views.Home;
 
 /**
  *
@@ -24,6 +25,8 @@ public class Start extends javax.swing.JFrame {
     private String currentSelectedCard;
     private char[] enteredPin;
     private int unlockAttempts = 3;
+    Home home = new Home();
+    
 
     public ImageIcon img = new ImageIcon(getClass().getResource("logo_small.png"));
     /**
@@ -59,7 +62,7 @@ public class Start extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(533, 377));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 36)); // NOI18N
         jLabel2.setText("Bitte Karte einführen");
 
         dropdown_cards.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card 1", "Card 2", "Card 3", "Card 4" }));
@@ -69,8 +72,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        passwordField.setText("jPasswordField1");
-
+        button_confirm.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 18)); // NOI18N
         button_confirm.setText("Bestätigen");
         button_confirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +80,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -106,18 +109,20 @@ public class Start extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                             .addComponent(dropdown_cards, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(button_confirm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(button_confirm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(attempsLeft)
-                .addGap(209, 209, 209))
+                .addGap(0, 44, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(attempsLeft)
+                        .addGap(209, 209, 209))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,6 +185,8 @@ public class Start extends javax.swing.JFrame {
             } else {
                 System.out.println(card.getNameHolder());
                 //Show Home GUI
+                this.dispose();
+                home.setVisible(true);
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not Found!");
