@@ -43,6 +43,8 @@ public class Quittung extends javax.swing.JFrame {
         bezugZahlLabel = new javax.swing.JLabel();
         frankenLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
+        backToHome = new javax.swing.JButton();
+        bezugLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +70,15 @@ public class Quittung extends javax.swing.JFrame {
 
         frankenLabel2.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 18)); // NOI18N
         frankenLabel2.setText("Franken");
+
+        backToHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToHomeActionPerformed(evt);
+            }
+        });
+
+        bezugLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 18)); // NOI18N
+        bezugLabel1.setText("Back to Home:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,6 +113,12 @@ public class Quittung extends javax.swing.JFrame {
                                     .addComponent(frankenLabel2)))))
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(78, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bezugLabel1)
+                .addGap(36, 36, 36)
+                .addComponent(backToHome, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +141,13 @@ public class Quittung extends javax.swing.JFrame {
                     .addComponent(frankenLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backToHome, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(bezugLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,6 +170,13 @@ public class Quittung extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backToHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeActionPerformed
+        Home home = new Home();
+        home.sendCard(card);
+        this.dispose();
+        home.setVisible(true);
+    }//GEN-LAST:event_backToHomeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -156,8 +186,8 @@ public class Quittung extends javax.swing.JFrame {
         jLabel3.setText(card.getBalance());
     }
     
-    public void printBezug(String Money){
-        bezugZahlLabel.setText(Money);
+    public void printBezug(int Money){
+        bezugZahlLabel.setText(String.valueOf(Money));
     }
     
     public void sendCard(Card card) {
@@ -165,7 +195,9 @@ public class Quittung extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backToHome;
     public javax.swing.JLabel bezugLabel;
+    public javax.swing.JLabel bezugLabel1;
     public javax.swing.JLabel bezugZahlLabel;
     public javax.swing.JLabel frankenLabel2;
     private javax.swing.JLabel jLabel1;

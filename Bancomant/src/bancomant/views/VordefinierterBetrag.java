@@ -366,9 +366,11 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     
     private void printMoney(int money) throws IOException{
         Quittung quittung = new Quittung();
-        quittung.sendCard(card);
         int newBalance = Integer.parseInt(card.getBalance()) - money;
         updateBalance(newBalance);
+        quittung.sendCard(card);
+        quittung.printBezug(money);
+        quittung.printQuittung();
         this.dispose();
         quittung.setVisible(true);
         
