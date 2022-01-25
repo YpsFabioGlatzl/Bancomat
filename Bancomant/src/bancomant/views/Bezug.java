@@ -10,6 +10,8 @@ package bancomant.views;
  * @author np
  */
 public class Bezug extends javax.swing.JFrame {
+    
+    VordefinierterBetrag vB = new VordefinierterBetrag();
 
     //Home home = new Home();
     
@@ -155,7 +157,9 @@ public class Bezug extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        vB.setVisible(true);
+              
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

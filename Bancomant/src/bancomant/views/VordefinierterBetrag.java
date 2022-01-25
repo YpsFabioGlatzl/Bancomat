@@ -16,6 +16,8 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     Card card = new Card();
     Scheine scheine = new Scheine();
     Quittung quittung = new Quittung();
+    balanceToLow bl = new balanceToLow();
+    
     
     
 
@@ -223,36 +225,58 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     private void get50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get50ActionPerformed
         if(checkBalance(50) == true){
             printMoney(50); 
+        } else {
+            
         }
     }//GEN-LAST:event_get50ActionPerformed
 
     private void get200ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get200ActionPerformed
         if(checkBalance(200) == true){
             printMoney(200); 
+        } else {
+            bl.prepareScreen();
+            this.dispose();
+            bl.setVisible(true);
         }
     }//GEN-LAST:event_get200ActionPerformed
 
     private void get100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get100ActionPerformed
         if(checkBalance(100) == true){
             printMoney(100); 
+        } else {
+            bl.prepareScreen();
+            this.dispose();
+            bl.setVisible(true);
         }
     }//GEN-LAST:event_get100ActionPerformed
 
     private void get150ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get150ActionPerformed
         if(checkBalance(150) == true){
             printMoney(150); 
+        } else {
+            bl.prepareScreen();
+            this.dispose();
+            bl.setVisible(true);
         }
     }//GEN-LAST:event_get150ActionPerformed
 
     private void get20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get20ActionPerformed
         if(checkBalance(20) == true){
             printMoney(20); 
+        } else {
+            bl.prepareScreen();
+            this.dispose();
+            bl.setVisible(true);
         }
     }//GEN-LAST:event_get20ActionPerformed
 
     private void get300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get300ActionPerformed
         if(checkBalance(300) == true){
             printMoney(300); 
+        } else {
+            bl.prepareScreen();
+            this.dispose();
+            bl.setVisible(true);
         }
     }//GEN-LAST:event_get300ActionPerformed
 
