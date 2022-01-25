@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class Card {
     private String pathToCards = "./src/data/";
+    private Card currentCard;
     private String card;
     private String nameHolder;
     private String surnameHolder;
@@ -26,13 +27,14 @@ public class Card {
     private String cardNumber;
     private String validTill;
     private String pin;
+    private String balance;
     private char[] specialPin = new char[6];
     
     public Card(){
         
     }
     
-    public Card(String nameHolder, String surnameHolder, String nameConto, String IBAN, String bank, String cardNumber, String validTill, String pin){
+    public Card(String nameHolder, String surnameHolder, String nameConto, String IBAN, String bank, String cardNumber, String validTill, String pin, String balance){
         this.nameHolder = nameHolder;
         this.surnameHolder = surnameHolder;
         this.nameConto = nameConto;
@@ -41,6 +43,7 @@ public class Card {
         this.cardNumber = cardNumber;
         this.validTill = validTill;
         this.pin = pin;
+        this.balance = balance;
     }
     
     public Card checkCard(String cardName, char[] pin) throws FileNotFoundException{
@@ -53,7 +56,8 @@ public class Card {
         }
         s.close();
         
-        Card card = new Card(data.get(0), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5).toString(), data.get(6).toString(), data.get(7).toString());
+        Card card = new Card(data.get(0), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5), data.get(6), data.get(7), data.get(8));
+        setCurrentCard(card);
        
         setSpecialPin(card.getPin());
         
@@ -63,6 +67,16 @@ public class Card {
             return null;
         }   
     }
+    
+    public Card getCurrentCard(){
+        return this.currentCard;
+    }
+
+    public void setCurrentCard(Card currentCard) {
+        this.currentCard = currentCard;
+    }
+    
+    
     
     public void lockCard(String cardName){
         System.out.println("Card locked: " + cardName);
@@ -151,6 +165,16 @@ public class Card {
     public char[] getSpecialPin() {
         return specialPin;
     }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
+    
+    
 
     public void setSpecialPin(String Pin) {
         for (int i = 0;i < Pin.length(); i++){

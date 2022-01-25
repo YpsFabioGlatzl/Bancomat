@@ -5,11 +5,15 @@
  */
 package bancomant.views;
 
+import logic.CashBox;
+
 /**
  *
  * @author np
  */
 public class Scheine extends javax.swing.JFrame {
+    
+    CashBox box = new CashBox();
 
     /**
      * Creates new form Scheine
@@ -235,6 +239,20 @@ public class Scheine extends javax.swing.JFrame {
                 new Scheine().setVisible(true);
             }
         });
+    }
+    
+    public void available(String preferedNotes, int money){
+        box = box.getBox();
+        
+        switch (preferedNotes) {
+            case "20":
+                int anzahl = money % 20;
+                
+                
+        }
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

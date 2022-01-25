@@ -171,6 +171,10 @@ public class Quittung extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void printQuittung(int money){
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel bezugLabel;

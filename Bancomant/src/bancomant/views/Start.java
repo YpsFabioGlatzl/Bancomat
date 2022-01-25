@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import logic.Card;
 import bancomant.views.Home;
+import logic.CashBox;
 
 /**
  *
@@ -22,18 +23,20 @@ import bancomant.views.Home;
  */
 public class Start extends javax.swing.JFrame {
     
-    private String currentSelectedCard;
+    public String currentSelectedCard;
     private char[] enteredPin;
     private int unlockAttempts = 3;
     Home home = new Home();
+    CashBox cashBox = new CashBox();
     
 
     public ImageIcon img = new ImageIcon(getClass().getResource("logo_small.png"));
     /**
      * Creates new form Start
      */
-    public Start() {
+    public Start() throws FileNotFoundException {
        initComponents();
+       cashBox.setAvailableNotes();
 
         
        JLabel label = new JLabel(img, JLabel.CENTER);
@@ -183,7 +186,6 @@ public class Start extends javax.swing.JFrame {
                     attempsLeft.setText("You entered your PIN incorrectly too many times. Your card is now blocked");
                 }
             } else {
-                System.out.println(card.getNameHolder());
                 //Show Home GUI
                 this.dispose();
                 home.setVisible(true);
@@ -223,10 +225,15 @@ public class Start extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Start().setVisible(true);
+                try {
+                    new Start().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
+    
     
 
 
