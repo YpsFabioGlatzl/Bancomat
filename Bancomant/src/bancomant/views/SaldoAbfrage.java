@@ -176,11 +176,13 @@ public class SaldoAbfrage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        //this.dispose();
         quittung.sendCard(card);
         quittung.bezugLabel.setVisible(false);
         quittung.bezugZahlLabel.setVisible(false);
         quittung.frankenLabel2.setVisible(false);
+        quittung.sendCard(card);
+        quittung.printQuittung();
         quittung.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -226,11 +228,17 @@ public class SaldoAbfrage extends javax.swing.JFrame {
             }
         });
     }
-    
+    /**
+     * 
+     * @param card 
+     */
     public void sendCard(Card card){
         this.card = card;
     }
     
+    /**
+     * 
+     */
     public void prepareScreen(){
         showBalance.setText(card.getBalance());
     }

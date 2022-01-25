@@ -170,11 +170,17 @@ public class FreiBetrag extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         int choosenAmount = Integer.parseInt(this.choosenAmount.getText());
-        
+        Quittung qu = new Quittung();
+        Home hu = new Home();
         if(choosenAmount <= 300){
             if(checkBalance(choosenAmount) == true){
                 try {
                     printMoney(choosenAmount);
+                    qu.setVisible(true);
+                    qu.sendCard(card);
+                    qu.printQuittung();
+                    qu.printBezug(this.choosenAmount.getText());
+                    hu.setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(FreiBetrag.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -237,7 +243,7 @@ public class FreiBetrag extends javax.swing.JFrame {
         int newBalance = Integer.parseInt(card.getBalance()) - money;
         updateBalance(newBalance);
         this.dispose();
-        quittung.setVisible(true);
+        //quittung.setVisible(true);
         
     }
     
@@ -263,6 +269,6 @@ public class FreiBetrag extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton submit;
+    public javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }
