@@ -64,17 +64,9 @@
                   </Group>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="get100" alignment="0" min="-2" pref="136" max="-2" attributes="0"/>
-                              <Component id="get50" min="-2" pref="136" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="get20" min="-2" pref="136" max="-2" attributes="0"/>
-                          <EmptySpace min="47" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="get100" alignment="0" min="-2" pref="136" max="-2" attributes="0"/>
+                      <Component id="get50" min="-2" pref="136" max="-2" attributes="0"/>
+                      <Component id="get20" alignment="0" min="-2" pref="136" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
