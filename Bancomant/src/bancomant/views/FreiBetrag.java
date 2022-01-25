@@ -5,11 +5,19 @@
  */
 package bancomant.views;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logic.Card;
+
 /**
  *
  * @author np
  */
 public class FreiBetrag extends javax.swing.JFrame {
+    
+    Card card;
 
     /**
      * Creates new form FreiBetrag
@@ -28,7 +36,7 @@ public class FreiBetrag extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        choosenAmount = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -36,14 +44,14 @@ public class FreiBetrag extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        submit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 24)); // NOI18N
+        choosenAmount.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 24)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
         jLabel1.setText("Max. Betrag");
@@ -74,7 +82,7 @@ public class FreiBetrag extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(choosenAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -96,7 +104,7 @@ public class FreiBetrag extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(choosenAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -111,9 +119,9 @@ public class FreiBetrag extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitActionPerformed(evt);
             }
         });
 
@@ -123,14 +131,14 @@ public class FreiBetrag extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
 
@@ -160,9 +168,20 @@ public class FreiBetrag extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        int choosenAmount = Integer.parseInt(this.choosenAmount.getText());
+        
+        if(choosenAmount <= 300){
+            if(checkBalance(choosenAmount) == true){
+                try {
+                    printMoney(choosenAmount);
+                } catch (IOException ex) {
+                    Logger.getLogger(FreiBetrag.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_submitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,9 +217,44 @@ public class FreiBetrag extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void sendCard(Card card){
+        this.card = card;
+    }
+    
+    private boolean checkBalance(int money){
+        System.out.println(card.getBalance());
+        if((Integer.parseInt(card.getBalance()) - money) >= 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private void printMoney(int money) throws IOException{
+        Quittung quittung = new Quittung();
+        quittung.sendCard(card);
+        int newBalance = Integer.parseInt(card.getBalance()) - money;
+        updateBalance(newBalance);
+        this.dispose();
+        quittung.setVisible(true);
+        
+    }
+    
+    public void updateBalance(int newBalance) throws IOException{      
+        String basePath = "./src/data/";
+        String addOn = card.getCardId() + ".txt";
+        FileWriter fw = new FileWriter(basePath + addOn);
+        String balance = String.valueOf(newBalance);
+        fw.write(card.getNameHolder()+ " " + card.getSurnameHolder()+ " " + card.getNameConto()+ " " + card.getIBAN()+ " " + card.getBank()+ " " + card.getCardNumber()+ " " + card.getValidTill()+ " " + card.getPin() + " " + balance);
+        fw.close();
+        
+        
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField choosenAmount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -209,6 +263,6 @@ public class FreiBetrag extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }

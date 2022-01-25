@@ -5,6 +5,11 @@
  */
 package bancomant.views;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logic.Card;
 
 /**
@@ -223,7 +228,11 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
         balanceToLow bl = new balanceToLow();
         bl.sendCard(card);
         if(checkBalance(50) == true){
-            printMoney(50); 
+            try { 
+                printMoney(50);
+            } catch (IOException ex) {
+                Logger.getLogger(VordefinierterBetrag.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             bl.prepareScreen();
             this.dispose();
@@ -235,7 +244,11 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
         balanceToLow bl = new balanceToLow();
         bl.sendCard(card);
         if(checkBalance(200) == true){
-            printMoney(200); 
+            try { 
+                printMoney(200);
+            } catch (IOException ex) {
+                Logger.getLogger(VordefinierterBetrag.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             bl.prepareScreen();
             this.dispose();
@@ -247,7 +260,11 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
         balanceToLow bl = new balanceToLow();
         bl.sendCard(card);
         if(checkBalance(100) == true){
-            printMoney(100); 
+            try { 
+                printMoney(100);
+            } catch (IOException ex) {
+                Logger.getLogger(VordefinierterBetrag.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             bl.prepareScreen();
             this.dispose();
@@ -259,7 +276,11 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
         balanceToLow bl = new balanceToLow();
         bl.sendCard(card);
         if(checkBalance(150) == true){
-            printMoney(150); 
+            try { 
+                printMoney(150);
+            } catch (IOException ex) {
+                Logger.getLogger(VordefinierterBetrag.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             bl.prepareScreen();
             this.dispose();
@@ -271,7 +292,11 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
         balanceToLow bl = new balanceToLow();
         bl.sendCard(card);
         if(checkBalance(20) == true){
-            printMoney(20); 
+            try { 
+                printMoney(20);
+            } catch (IOException ex) {
+                Logger.getLogger(VordefinierterBetrag.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             bl.prepareScreen();
             this.dispose();
@@ -283,7 +308,11 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
         balanceToLow bl = new balanceToLow();
         bl.sendCard(card);
         if(checkBalance(300) == true){
-            printMoney(300); 
+            try { 
+                printMoney(300);
+            } catch (IOException ex) {
+                Logger.getLogger(VordefinierterBetrag.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             bl.prepareScreen();
             this.dispose();
@@ -335,12 +364,26 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
         }
     }
     
-    private void printMoney(int money){
-        Scheine scheine = new Scheine();
-        //scheine.printScheine(money);
+    private void printMoney(int money) throws IOException{
+        Quittung quittung = new Quittung();
+        quittung.sendCard(card);
+        int newBalance = Integer.parseInt(card.getBalance()) - money;
+        updateBalance(newBalance);
         this.dispose();
-        scheine.available("20" ,money);
-        scheine.setVisible(true);
+        quittung.setVisible(true);
+        
+    }
+    
+    public void updateBalance(int newBalance) throws IOException{      
+        String basePath = "./src/data/";
+        String addOn = card.getCardId() + ".txt";
+        FileWriter fw = new FileWriter(basePath + addOn);
+        String balance = String.valueOf(newBalance);
+        fw.write(card.getNameHolder()+ " " + card.getSurnameHolder()+ " " + card.getNameConto()+ " " + card.getIBAN()+ " " + card.getBank()+ " " + card.getCardNumber()+ " " + card.getValidTill()+ " " + card.getPin() + " " + balance);
+        fw.close();
+        
+        
+        
     }
     
     public void sendCard(Card card) {
@@ -365,4 +408,8 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     private javax.swing.JLabel preSet300;
     private javax.swing.JLabel preSet50;
     // End of variables declaration//GEN-END:variables
+
+    private Object Integer(String balance) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

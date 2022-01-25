@@ -16,6 +16,7 @@ import java.util.Scanner;
  * @author fglat
  */
 public class Card {
+    private String cardId;
     private String pathToCards = "./src/data/";
     private Card currentCard;
     private String card;
@@ -34,7 +35,7 @@ public class Card {
         
     }
     
-    public Card(String nameHolder, String surnameHolder, String nameConto, String IBAN, String bank, String cardNumber, String validTill, String pin, String balance){
+    public Card(String nameHolder, String surnameHolder, String nameConto, String IBAN, String bank, String cardNumber, String validTill, String pin, String balance, String cardId){
         this.nameHolder = nameHolder;
         this.surnameHolder = surnameHolder;
         this.nameConto = nameConto;
@@ -44,6 +45,7 @@ public class Card {
         this.validTill = validTill;
         this.pin = pin;
         this.balance = balance;
+        this.cardId = cardId;
     }
     
     public Card checkCard(String cardName, char[] pin) throws FileNotFoundException{
@@ -56,7 +58,7 @@ public class Card {
         }
         s.close();
         
-        Card card = new Card(data.get(0), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5), data.get(6), data.get(7), data.get(8));
+        Card card = new Card(data.get(0), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5), data.get(6), data.get(7), data.get(8), cardName);
         setCurrentCard(card);
        
         setSpecialPin(card.getPin());
@@ -181,8 +183,15 @@ public class Card {
                 specialPin[i] = Pin.charAt(i);
             }
         }
-    }
     
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+}
     
     
 
