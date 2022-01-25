@@ -18,7 +18,7 @@ public class CashBox {
     
     private String pathToBox = "./src/data/cashBox.txt";
     
-    
+    private int bankNotes10;
     private int bankNotes20;
     private int bankNotes50;
     private int bankNotes100;
@@ -30,7 +30,8 @@ public class CashBox {
         
     }
     
-    public CashBox(int notes20, int notes50, int notes100, int notes200){
+    public CashBox(int notes10, int notes20, int notes50, int notes100, int notes200){
+        this.bankNotes10 = notes10;
         this.bankNotes20 = notes20;
         this.bankNotes50 = notes50;
         this.bankNotes100 = notes100;
@@ -46,7 +47,7 @@ public class CashBox {
         }
         s.close();
         
-        box = new CashBox(Integer.parseInt(data.get(0)), Integer.parseInt(data.get(1)), Integer.parseInt(data.get(2)), Integer.parseInt(data.get(3)));
+        box = new CashBox(Integer.parseInt(data.get(0)), Integer.parseInt(data.get(1)), Integer.parseInt(data.get(2)), Integer.parseInt(data.get(3)), Integer.parseInt(data.get(4)));
         
     }
 

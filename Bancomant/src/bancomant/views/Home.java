@@ -5,6 +5,8 @@
  */
 package bancomant.views;
 
+import logic.Card;
+
 
 
 /**
@@ -16,6 +18,7 @@ public class Home extends javax.swing.JFrame {
     SaldoAbfrage sa = new SaldoAbfrage();
     PincodeAendern pa = new PincodeAendern();
     Bezug bezug = new Bezug();
+    Card card;
 
     /**
      * Creates new form Home
@@ -180,17 +183,22 @@ public class Home extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        bezug.sendCard(card);
         bezug.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        pa.sendCard(card);
         this.dispose();
         pa.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        sa.sendCard(card);
+        sa.prepareScreen();
         this.dispose();
         sa.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -228,6 +236,10 @@ public class Home extends javax.swing.JFrame {
                 new Home().setVisible(true);
             }
         });
+    }
+    
+    public void sendCard(Card card){
+        this.card = card;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

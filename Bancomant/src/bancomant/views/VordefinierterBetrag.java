@@ -13,10 +13,7 @@ import logic.Card;
  */
 public class VordefinierterBetrag extends javax.swing.JFrame {
     
-    Card card = new Card();
-    Scheine scheine = new Scheine();
-    Quittung quittung = new Quittung();
-    balanceToLow bl = new balanceToLow();
+    Card card;
     
     
     
@@ -27,7 +24,7 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     public VordefinierterBetrag() {
         initComponents();
         
-        card = card.getCurrentCard();
+        
     }
     
     
@@ -223,14 +220,20 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void get50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get50ActionPerformed
+        balanceToLow bl = new balanceToLow();
+        bl.sendCard(card);
         if(checkBalance(50) == true){
             printMoney(50); 
         } else {
-            
+            bl.prepareScreen();
+            this.dispose();
+            bl.setVisible(true);
         }
     }//GEN-LAST:event_get50ActionPerformed
 
     private void get200ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get200ActionPerformed
+        balanceToLow bl = new balanceToLow();
+        bl.sendCard(card);
         if(checkBalance(200) == true){
             printMoney(200); 
         } else {
@@ -241,6 +244,8 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     }//GEN-LAST:event_get200ActionPerformed
 
     private void get100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get100ActionPerformed
+        balanceToLow bl = new balanceToLow();
+        bl.sendCard(card);
         if(checkBalance(100) == true){
             printMoney(100); 
         } else {
@@ -251,6 +256,8 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     }//GEN-LAST:event_get100ActionPerformed
 
     private void get150ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get150ActionPerformed
+        balanceToLow bl = new balanceToLow();
+        bl.sendCard(card);
         if(checkBalance(150) == true){
             printMoney(150); 
         } else {
@@ -261,6 +268,8 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     }//GEN-LAST:event_get150ActionPerformed
 
     private void get20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get20ActionPerformed
+        balanceToLow bl = new balanceToLow();
+        bl.sendCard(card);
         if(checkBalance(20) == true){
             printMoney(20); 
         } else {
@@ -271,6 +280,8 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     }//GEN-LAST:event_get20ActionPerformed
 
     private void get300ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get300ActionPerformed
+        balanceToLow bl = new balanceToLow();
+        bl.sendCard(card);
         if(checkBalance(300) == true){
             printMoney(300); 
         } else {
@@ -316,6 +327,7 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     }
     
     private boolean checkBalance(int money){
+        System.out.println(card.getBalance());
         if((Integer.parseInt(card.getBalance()) - money) >= 0){
             return true;
         } else {
@@ -324,10 +336,15 @@ public class VordefinierterBetrag extends javax.swing.JFrame {
     }
     
     private void printMoney(int money){
+        Scheine scheine = new Scheine();
         //scheine.printScheine(money);
         this.dispose();
         scheine.available("20" ,money);
         scheine.setVisible(true);
+    }
+    
+    public void sendCard(Card card) {
+        this.card = card;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

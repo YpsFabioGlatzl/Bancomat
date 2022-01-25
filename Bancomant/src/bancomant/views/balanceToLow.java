@@ -12,8 +12,8 @@ import logic.Card;
  */
 public class balanceToLow extends javax.swing.JFrame {
     
-    Bezug bezug = new Bezug();
     Card card;
+    
     
 
     /**
@@ -21,7 +21,7 @@ public class balanceToLow extends javax.swing.JFrame {
      */
     public balanceToLow() {
         initComponents();
-        card = card.getCurrentCard();
+        
     }
 
     /**
@@ -131,6 +131,8 @@ public class balanceToLow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backToBezugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToBezugActionPerformed
+        Bezug bezug = new Bezug();
+        bezug.sendCard(card);
         this.dispose();
         bezug.setVisible(true);
 
@@ -167,12 +169,17 @@ public class balanceToLow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new balanceToLow().setVisible(true);
+                
             }
         });
     }
     
     public void prepareScreen(){
         labelBalance.setText(card.getBalance());
+    }
+    
+    public void sendCard(Card card){
+        this.card = card;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

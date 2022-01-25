@@ -36,7 +36,7 @@ public class Start extends javax.swing.JFrame {
      */
     public Start() throws FileNotFoundException {
        initComponents();
-       cashBox.setAvailableNotes();
+       
 
         
        JLabel label = new JLabel(img, JLabel.CENTER);
@@ -170,6 +170,11 @@ public class Start extends javax.swing.JFrame {
     }//GEN-LAST:event_dropdown_cardsActionPerformed
 
     private void button_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_confirmActionPerformed
+        try {
+            cashBox.setAvailableNotes();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
        currentSelectedCard = dropdown_cards.getSelectedItem().toString();
        enteredPin = passwordField.getPassword();
        Card card = new Card();
@@ -188,7 +193,9 @@ public class Start extends javax.swing.JFrame {
             } else {
                 //Show Home GUI
                 this.dispose();
+                home.sendCard(card);
                 home.setVisible(true);
+                
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File not Found!");

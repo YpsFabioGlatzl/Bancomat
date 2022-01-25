@@ -5,11 +5,14 @@
  */
 package bancomant.views;
 
+import logic.Card;
+
 /**
  *
  * @author np
  */
 public class Quittung extends javax.swing.JFrame {
+    Card card;
 
     /**
      * Creates new form Quittung
@@ -174,6 +177,10 @@ public class Quittung extends javax.swing.JFrame {
     
     public void printQuittung(int money){
         
+    }
+    
+    public void sendCard(Card card) {
+        this.card = card;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
